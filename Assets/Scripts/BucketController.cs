@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BucketController : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class BucketController : MonoBehaviour
     [SerializeField] Sprite Bucket;
     [SerializeField] Sprite FullBucket;
     [SerializeField] GameObject[] bucketPosList;
+    [SerializeField] TextMeshProUGUI scoreText;
+
+    // スコア
+    private int score = 0;
     
     private bool fulledFlag = false;
     private float delta_1 = 0;
@@ -17,6 +22,10 @@ public class BucketController : MonoBehaviour
     private int currentPos = 4;
 
     bool pushedFlag = false;
+
+    public int getScore(){
+        return score;
+    }
 
     private void Move(){
         int movePos = 0;
@@ -61,6 +70,9 @@ public class BucketController : MonoBehaviour
             if (hit2D.collider.gameObject.name.Contains("Water")) {
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = FullBucket;
                 fulledFlag = true;
+
+                score++;
+                scoreText.text = $"{score}";
             }
 
             Destroy(hit2D.collider.gameObject);
@@ -88,6 +100,7 @@ public class BucketController : MonoBehaviour
                 pushedFlag = false;
             }
         }
+
     }
 
     // 可視化ツール
