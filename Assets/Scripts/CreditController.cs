@@ -12,7 +12,6 @@ public class CreditController : MonoBehaviour
     bool pushedFlag = false;
 
     private void creditChange(){
-
         // 左に移動
         if (Input.GetKey (KeyCode.LeftArrow) | Input.GetKey (KeyCode.A)) { 
             pushedFlag = true;

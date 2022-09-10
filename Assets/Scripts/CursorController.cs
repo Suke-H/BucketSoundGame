@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CursorController : MonoBehaviour
 {
-
     [SerializeField] GameObject[] cursorPosList;
     [SerializeField] float inputWaitSpan;
 
@@ -34,7 +33,7 @@ public class CursorController : MonoBehaviour
 
         // シーン遷移
         if (Input.GetKey (KeyCode.Return)) { 
-            if (currentPos == 0){ SceneManager.LoadScene("SoundGame"); }
+            if (currentPos == 0){ SceneManager.LoadScene("StageSelect"); }
             else { SceneManager.LoadScene("Credit0"); }
         }
     }

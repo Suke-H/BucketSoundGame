@@ -28,19 +28,4 @@ public class EnemyGenerator : MonoBehaviour
         enemy.transform.position = enemyPosList[num].transform.position;
     }
 
-    // void Update()
-    // {
-    //     delta_1 += Time.deltaTime;
-    //     delta_2 += Time.deltaTime;
-
-    //     // if (delta_1 > waterSpan){
-    //     //     delta_1 = 0;
-    //     //     FallWater(Water);
-    //     // }
-
-    //     if (delta_2 > mouseSpan){
-    //         delta_2 = 0;
-    //         Spawn(Mouse, mousePos);
-    //     }
-    // }
 }

@@ -33,7 +33,6 @@ public class BucketController : MonoBehaviour
         int y = currentPos / 3;
 
         // (↑←↓→, WASD)入力（入力中フラグがオフなら）
-        // if (!pushedFlag){
             
         // 左に移動
         if (Input.GetKey (KeyCode.LeftArrow) | Input.GetKey (KeyCode.A)) { 
