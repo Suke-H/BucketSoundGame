@@ -8,14 +8,9 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private float waterSpan;
     [SerializeField] private float mouseSpan;
     [SerializeField] GameObject Water;
-    // [SerializeField] GameObject Mouse;
     [SerializeField] GameObject[] enemyPrefabList;
     [SerializeField] GameObject[] waterPosList;
-    // [SerializeField] GameObject mousePos;
     [SerializeField] GameObject[] enemyPosList;
-
-    float delta_1 = 0;
-    float delta_2 = 0;
 
     // スポーン
     public void FallWater()

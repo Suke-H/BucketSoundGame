@@ -7,9 +7,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // 移動
-        transform.Translate(0.04f, 0, 0);
+        transform.Translate(10f*Time.deltaTime, 0, 0);
 
-        // // ある程度下まで行ったら消える
+        // // ある程度右に行ったら消える
         // if (transform.position.x > 10) {
         //     Destroy(this.gameObject);
         // }
