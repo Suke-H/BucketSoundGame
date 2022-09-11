@@ -812,7 +812,7 @@ MonoBehaviour:
   - {fileID: 2109295865}
   - {fileID: 1435010691}
   SceneList:
-  - StageSelect
+  - CheckStage
   - Credit0
   inputWaitSpan: 0.1
 --- !u!212 &1716736679

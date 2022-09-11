@@ -85,7 +85,12 @@ public class Result : MonoBehaviour
         TankGauge.value = tankPer/100f;
 
         // クリア判定
-        if (tankPer >= 75){
+
+        if (tankPer >= 100){
+            ClearJudge.text = "FULLTANK!!";
+        }
+
+        else if (tankPer >= 75){
             ClearJudge.text = "CLEAR!";
         }
 

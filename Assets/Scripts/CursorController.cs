@@ -11,8 +11,10 @@ public class CursorController : MonoBehaviour
 
     private int currentPos = 0;
 
-    private float delta;
+    private float delta_1;
+    private float delta_2;
     bool pushedFlag = false;
+    bool startFlag = false;
 
     private void cursorInput(){
         int nextPos = currentPos;
@@ -40,15 +42,24 @@ public class CursorController : MonoBehaviour
 
     void Update()
     {
-        // 移動
-        if (!pushedFlag){
-            cursorInput();
+        delta_1 += Time.deltaTime; 
+        if (delta_1 > 1.0f){
+            delta_1 = 0;
+            startFlag = true;
         }
-        else {
-            delta += Time.deltaTime; 
-            if (delta > inputWaitSpan){
-                delta = 0;
-                pushedFlag = false;
+
+        // 移動
+        if (startFlag){
+            if (!pushedFlag){
+                cursorInput();
+            }
+
+            else {
+                delta_2 += Time.deltaTime; 
+                if (delta_2 > inputWaitSpan){
+                    delta_2 = 0;
+                    pushedFlag = false;
+                }
             }
         }
     }
