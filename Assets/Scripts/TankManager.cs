@@ -9,13 +9,13 @@ public class TankManager : MonoBehaviour
     [SerializeField] GameObject[] HeartList;
     [SerializeField] Sprite HalfHeart;
     [SerializeField] Sprite EmptyHeart;
-
-    // [SerializeField] Sprite Q1Tank;
-    // [SerializeField] Sprite Q2Tank;
     [SerializeField] Sprite[] QuarterTank;
     [SerializeField] int allDropNum;
 
+    [SerializeField] GameObject GameOverPopUp;
+
     BucketController bucketController;
+    // Result result;
     
     // 残基
     private int HP = 6;
@@ -39,9 +39,20 @@ public class TankManager : MonoBehaviour
         }
     }
 
+    public int getHP(){
+        return HP;
+    }
+
+    public int getAllDropNum(){
+        return allDropNum;
+    }
 
     void Start(){
         bucketController = GameObject.Find("Bucket").GetComponent<BucketController>();
+        // result = GameObject.Find("Timeline").GetComponent<Result>();
+
+        // 最初は消しておく
+        // GameOverPopUp.SetActive(false);
 
         quarterScore[0] = allDropNum/4;
         quarterScore[1] = allDropNum/2;
@@ -58,11 +69,16 @@ public class TankManager : MonoBehaviour
         if (hit2D){
             Destroy(hit2D.collider.gameObject);
             if (HP > 0){
-                // HeartList[3-HP].GetComponent<SpriteRenderer>().sprite = EmptyHeart;
-                // HP--;
                 reduceHeart();
             }
         }
+
+        // HPが0になったらGAME OVER
+        // (リザルト画面が出てたら、何もしない)
+        // bool IsResultPopuped = result.GetIsResultPopuped();
+        // if (!IsResultPopuped & HP <= 0){
+        //     GameOverPopUp.SetActive(true);
+        // }
 
         // スコア更新
         score = bucketController.getScore();
