@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        // Escでタイトルへ
+        // Escでタイトルへtest
         if (Input.GetKey (KeyCode.Escape)) { 
             SceneManager.LoadScene("Title");
         }
