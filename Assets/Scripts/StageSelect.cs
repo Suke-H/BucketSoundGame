@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ステージ選択画面の制御（今回未使用）
+/// </summary>
 public class StageSelect : MonoBehaviour
 {
     [SerializeField] GameObject[] stageNameList;

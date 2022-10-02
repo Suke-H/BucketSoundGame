@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// カーソル制御
+/// </summary>
 public class CursorController : MonoBehaviour
 {
     [SerializeField] GameObject[] cursorPosList;

@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// ゲーム中にEscでタイトルへ遷移する用のスクリプト
+/// </summary>
 public class GameController : MonoBehaviour
 {
-    public void GameStart(){
-        SceneManager.LoadScene("Stage1"); 
-    }
-
     void Update()
     {
-        // Escでタイトルへtest
+        // Escでタイトルへ
         if (Input.GetKey (KeyCode.Escape)) { 
             SceneManager.LoadScene("Title");
         }
     }
-
     
 }

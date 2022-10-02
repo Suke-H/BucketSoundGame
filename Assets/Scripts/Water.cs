@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// しずく用
+/// </summary>
 public class Water : MonoBehaviour
 {
     void Update()

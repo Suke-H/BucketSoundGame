@@ -3,47 +3,56 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
-public class Result : MonoBehaviour
+/// <summary>
+/// ポップアップ制御
+/// （リザルト画面とゲームオーバー画面）
+/// </summary>
+public class Popup : MonoBehaviour
 {
-    AudioSource audioSource;
 
-    [SerializeField] double FadeOutStart;
-    [SerializeField] double FadeOutEnd;
+    [SerializeField] double FadeOutStart; // 音楽フェードアウト開始タイミング(秒)
+    [SerializeField] double FadeOutEnd;  // 音楽フェードアウト終了タイミング(秒)
 
-    [SerializeField] GameObject ResultPopUp;
-    [SerializeField] GameObject GameOverPopUp;
+    [SerializeField] GameObject ResultPopUp; // リザルトのポップアップ画面
+    [SerializeField] GameObject GameOverPopUp; // ゲームオーバーのポップアップ画面
 
-    [SerializeField] GameObject[] HeartList;
-    [SerializeField] Sprite HalfHeart;
-    [SerializeField] Sprite EmptyHeart;
+    // リザルト画面用 ///////
 
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject[] HeartList; // ハート3つのリスト
+    [SerializeField] Sprite HalfHeart; // 半分のハートの画像
+    [SerializeField] Sprite EmptyHeart; // 完全になくなったハートの画像
 
-    [SerializeField] Slider TankGauge;
-    [SerializeField] TextMeshProUGUI TankPerText;
+    [SerializeField] TextMeshProUGUI scoreText; // スコアテキスト
+    [SerializeField] TextMeshProUGUI ClearJudgeText; // クリア判定テキスト
 
-    [SerializeField] TextMeshProUGUI ClearJudge;
+    [SerializeField] Slider TankGauge; // タンクの水量ゲージ
+    [SerializeField] TextMeshProUGUI TankPerText; // 水量の割合(%)
 
-    TankManager tankManager;
+    /////////////////////////
+
+    AudioSource audioSource; // オーディオソース（BGMフェードアウトに利用）
+
+    // 別スクリプト参照用
+    TankManager tankManager; 
     BucketController bucketController;
 
-    double FadeSpan;
+    double FadeSpan; 
+    double actualFadeOutStart;
+    double actualFadeOutEnd;
 
     bool IsFadeEnded = false;
     double FadeDeltaTime = 0;
     bool IsResultPopuped = false;
-
-    double actualFadeOutStart;
-    double actualFadeOutEnd;
     
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
         FadeSpan = FadeOutEnd - FadeOutStart;
-        actualFadeOutStart =  FadeOutStart;
+        actualFadeOutStart = FadeOutStart;
         actualFadeOutEnd = FadeOutEnd;
 
-        // はじめは消しておく
+        // はじめはポップアップを消しておく
         ResultPopUp.SetActive(false);
         GameOverPopUp.SetActive(false);
 
@@ -55,11 +64,18 @@ public class Result : MonoBehaviour
         return IsResultPopuped;
     }
 
+
+    /// <summary>
+    /// リザルトポップアップの表示
+    /// </summary>
     void ResultPopup(){
-        // 表示
+        // リザルトポップアップ表示
         ResultPopUp.SetActive(true);
 
         // ハート表示
+        // ハート3つでHP1～6を表す
+        // 例：HP3 -> () (     
+        //     HP5 -> () () (
         int HP = tankManager.getHP();
 
         for (int i=0; i<3; i++){
@@ -76,35 +92,32 @@ public class Result : MonoBehaviour
         int score = bucketController.getScore();
         scoreText.text = $"{score}";
 
-        // パーセント
+        // タンクの水量の割合(%)
         int allDropNum = tankManager.getAllDropNum();
         int tankPer = score*100 / allDropNum;
         TankPerText.text = $"{tankPer}";
 
-        // タンクゲージ
+        // タンクの水量ゲージ
         TankGauge.value = tankPer/100f;
 
         // クリア判定
-
         if (tankPer >= 100){
-            ClearJudge.text = "FULLTANK!!";
+            ClearJudgeText.text = "FULLTANK!!";
         }
-
         else if (tankPer >= 75){
-            ClearJudge.text = "CLEAR!";
+            ClearJudgeText.text = "CLEAR!";
         }
-
         else {
-            ClearJudge.text = "FAIL";
+            ClearJudgeText.text = "FAIL";
         }
-
     }
 
+    /// <summary>
+    /// BGMのフェードアウト
+    /// </summary>
     void Fade(){
-         // フェードアウト開始
+        // フェードアウト開始
         if (FadeDeltaTime >= actualFadeOutStart){
-
-            // フェードアウト
             audioSource.volume = (float)(1.0 - (FadeDeltaTime - actualFadeOutStart) / FadeSpan);
         }
 
@@ -112,7 +125,6 @@ public class Result : MonoBehaviour
         if (FadeDeltaTime > actualFadeOutEnd){
             IsFadeEnded = true;
         }
-        
     }
 
     void Update()
